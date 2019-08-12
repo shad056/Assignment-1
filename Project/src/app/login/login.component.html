@@ -1,0 +1,13 @@
+<form style="margin:20px;">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Enter username</label>
+    <input type="text" [(ngModel)]="uname" name="uname" class="form-control" id="exampleInputEmail1"  placeholder="Enter username">
+  </div>
+
+  <button (click)="onSubmit()" class="btn btn-primary">Submit</button>
+</form>
+<div *ngIf="errors" class="alert alert-danger" role="alert">
+  {{error}}
+</div>
+
+

@@ -1,0 +1,25 @@
+<h1>Accounts Page </h1>
+<img src="https://pbs.twimg.com/profile_images/956310291154792451/vnJC8b_P_400x400.jpg" style="height: 200px; width: 200px; margin: 20px;" alt="img">
+<h2>Welcome {{username}}</h2>
+<div class="form-group">
+    <label for="groups">
+      Your Group: 
+    </label>
+  <select id="group" name="group" [(ngModel)]='selectgroup' class="form-control" (change)="onGroupClick($event.target.value)">
+  <option *ngFor="let opt of group" [value]="opt">{{ opt }} </option>
+  </select>
+  </div>
+  <div class="form-group">
+    <label for="channels">
+      Channels
+    </label>
+  <select id="channel" name="channel" [(ngModel)]='selectchannel' class="form-control">
+  <option *ngFor="let channel of channels" [value]="channel">{{ channel }} </option>
+  </select>
+  </div>
+  <div *ngIf="error" class="alert alert-danger" role="alert">
+  {{errors}}
+  </div>
+<button class="btn btn-primary" (click)="onChannelClick()">View Channel History</button>
+<button class="btn btn-primary" style="margin-left: 40px;" (click)="onChatClick()">Goto Chat</button>
+<button style="margin-left: 40px;" class="btn btn-success" (click)="onLogOut()">Log Out</button>

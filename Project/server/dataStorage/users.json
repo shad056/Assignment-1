@@ -1,0 +1,2 @@
+[{"user":"Saad","email":"saad@gmail.com","Groups":["CoolGroup","NerdGroup"], "Roles":["Super Admin", "Group Admin"], "Channels":["5"]}, {"user":"Allan","email": "allan@gmail.com", "Groups":["CoolGroup"], "Roles":["Group Assis"], "Channels":[]},
+{"user":"John","email": "john@gmail.com", "Groups":["NerdGroup"], "Roles":["Group Admin"], "Channels":[]}]
