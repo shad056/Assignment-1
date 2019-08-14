@@ -13,15 +13,20 @@
                 <br>
                 <button class="btn btn-primary" (click)="CreateUser()">Submit</button>
             </div>
-            <div *ngIf="id=='addusertochannel' || id=='removeuserfromchannel'">
-                <div class="form-group">
-                    <label for="channels">
-                      Channels
-                    </label>
-                  <select id="channel" name="channel" [(ngModel)]='selectchannel' class="form-control">
-                  <option *ngFor="let channel of channels" [value]="channel">{{ channel }} </option>
-                  </select>
-                  </div>
+            <div *ngIf="id=='addusertochannel' || id=='removeuserfromchannel' || id=='removeuser' || id=='assignusergroupassis' || id=='assignuserrole'
+            || id=='adduseringroup' || id=='removeuserfromgroup'">
+
+                <div *ngIf="id=='addusertochannel' || id=='removeuserfromchannel'">
+                    <div class="form-group">
+                        <label for="channels">
+                          Channels
+                        </label>
+                      <select id="channel" name="channel" [(ngModel)]='selectchannel' class="form-control">
+                      <option *ngFor="let channel of channels" [value]="channel">{{ channel }} </option>
+                      </select>
+                      </div>
+                </div>
+                
                   <div class="form-group">
                       <label for="channels">
                         Users
@@ -30,6 +35,50 @@
                     <option *ngFor="let user of users" [value]="user">{{ user }} </option>
                     </select>
                     </div>
+
+                    <div *ngIf="id=='adduseringroup' || id=='removeuserfromgroup'">
+                        <div class="form-group">
+                            <label for="groups">
+                             Group: 
+                            </label>
+                          <select id="group" name="group" [(ngModel)]='selectgroup' class="form-control">
+                          <option *ngFor="let opt of groups" [value]="opt">{{ opt }} </option>
+                          </select>
+                          </div>
+                          <br>
+
+                          <div *ngIf="id=='removeuserfromgroup'">
+                              <button class="btn btn-primary" (click)="RemoveUserFromGroup()">Remove User from Group</button>
+                          </div>
+
+                          <div *ngIf="id=='adduseringroup'">
+                          <button class="btn btn-primary" (click)="AddUserGroup()">Add User in Group</button>
+                            </div>
+
+
+                        </div>
+
+                    <div *ngIf="id=='assignuserrole'">
+                        <div class="form-group">
+                            <label for="channels">
+                              Role
+                            </label>
+                          <select id="role" name="role" [(ngModel)]='selectrole' class="form-control">
+                          <option *ngFor="let role of roles" [value]="role">{{ role }} </option>
+                          </select>
+                          </div>
+                          <br>
+                          <button class="btn btn-primary" (click)="AssignUserRole()">Assign User a Role</button>
+
+                    </div>
+
+                    <div *ngIf="id=='removeuser'">
+                        <button class="btn btn-primary" (click)="RemoveUser()">Remove User</button>
+                      </div>
+
+                      <div *ngIf="id=='assignusergroupassis'">
+                          <button class="btn btn-primary" (click)="AssignUserGroupAssis()">Assign User Group Assis Role</button>
+                      </div>
 
                   <div *ngIf="id=='removeuserfromchannel'">
                     <button class="btn btn-primary" (click)="RemoveUserfromChannel()">Remove User from channel</button>

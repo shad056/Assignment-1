@@ -59,4 +59,19 @@ RemoveChannel(channel) {
 RemoveUserfromChannel(user,channel) {
   return this.http.post<any>('http://localhost:3000/api/removeuserfromchannel',{user:user,channel: channel});
 }
+RemoveUser(user) {
+  return this.http.post<any>('http://localhost:3000/api/removeuser',{user:user});
+}
+AssignUserGroupAssis(user) {
+  return this.http.post<any>('http://localhost:3000/api/assignusergroupassis',{user:user});
+}
+AssignUserRole(user,role) {
+  return this.http.post<any>('http://localhost:3000/api/assignuserrole',{user:user, role: role});
+}
+AddUsertoGroup(user,group) {
+  return this.http.post<any>('http://localhost:3000/api/addusertogroup',{user:user, group: group});
+}
+RemoveUserFromGroup(user,group) {
+  return this.http.post<any>('http://localhost:3000/api/removeuserfromgroup',{user:user, group: group});
+}
 }

@@ -36,5 +36,10 @@ require('./routes/addusertochannelroute.js')(app,fs);
 require('./routes/removegrouproute.js')(app,fs);
 require('./routes/removechannelroute.js')(app,fs);
 require('./routes/removeuserfromchannel.js')(app,fs);
+require('./routes/removeuserroute.js')(app,fs);
+require('./routes/assignusergroupassis.js')(app,fs);
+require('./routes/assignuserrole.js')(app,fs);
+require('./routes/addusertogroup.js')(app,fs);
+require('./routes/removeuserfromgroup.js')(app,fs);
 
 

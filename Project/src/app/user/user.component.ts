@@ -22,7 +22,11 @@ export class UserComponent implements OnInit, OnDestroy {
   selectchannel = '';
   channels = [];
   selectuser = '';
+  selectrole = '';
   users;
+  groups = [];
+  selectgroup = '';
+  roles = ['Group Admin', 'Super Admin'];
   ngOnInit() {
     this.postSub = this.route.paramMap.subscribe(
       params => {this.id = params.get('id');}
@@ -32,12 +36,17 @@ export class UserComponent implements OnInit, OnDestroy {
         this.channels = res.channels;
     
       }
-    })
+    });
     this.service.AllUsers().subscribe(res => {
       if(res.valid === true) {
         this.users = res.users;
       }
-    })
+    });
+    this.service.AllGroups().subscribe(res => {
+      if(res.valid === true) {
+      this.groups = res.groups;
+      }
+    });
   }
   ngOnDestroy() {
     this.postSub.unsubscribe();
@@ -115,7 +124,136 @@ export class UserComponent implements OnInit, OnDestroy {
         else {
           this.success = false;
           this.errors = true;
-          this.error = 'Error, Please try again';
+          this.error = res.message;
+        }
+      });
+    }
+  }
+
+  RemoveUser() {
+    if(this.selectuser === '' || this.selectuser === undefined || this.selectuser === null) {
+      this.success = false;
+          this.errors = true;
+          this.error = 'Please select a valid user';
+    }
+   
+    else {
+      this.service.RemoveUser(this.selectuser).subscribe(res => {
+        if(res.valid==true){
+          this.errors = false;
+          this.success = true;
+          this.successmsg = this.selectuser + ' has been successfully removed';
+        }
+        else {
+          this.success = false;
+          this.errors = true;
+          this.error = 'User cannot be removed';
+        }
+      });
+    }
+  }
+  AssignUserGroupAssis() {
+    if(this.selectuser === '' || this.selectuser === undefined || this.selectuser === null) {
+      this.success = false;
+          this.errors = true;
+          this.error = 'Please select a valid user';
+    }
+   
+    else {
+      this.service.AssignUserGroupAssis(this.selectuser).subscribe(res => {
+        if(res.valid==true){
+          this.errors = false;
+          this.success = true;
+          this.successmsg = this.selectuser + ' has been successfully assigned the role of Group Assis ';
+        }
+        else {
+          this.success = false;
+          this.errors = true;
+          this.error = this.selectuser + ' has already been assigned the role of Group Assis'
+        }
+      });
+    }
+  }
+
+  AssignUserRole() {
+    if(this.selectrole === '' || this.selectrole === undefined || this.selectrole === null) {
+      this.success = false;
+          this.errors = true;
+          this.error = 'Please select a valid role';
+    }
+    else if (this.selectuser === '' || this.selectuser === undefined || this.selectuser === null) {
+      this.success = false;
+          this.errors = true;
+          this.error = 'Please select a valid user';
+    }
+   
+    else {
+      this.service.AssignUserRole(this.selectuser, this.selectrole).subscribe(res => {
+        if(res.valid==true){
+          this.errors = false;
+          this.success = true;
+          this.successmsg = this.selectuser + ' has been successfully assigned the role of ' + this.selectrole;
+        }
+        else {
+          this.success = false;
+          this.errors = true;
+          this.error = this.selectuser + ' has already been assigned the role of ' + this.selectrole;
+        }
+      });
+    }
+  }
+
+  AddUserGroup() {
+    if(this.selectgroup === '' || this.selectgroup === undefined || this.selectgroup === null) {
+      this.success = false;
+          this.errors = true;
+          this.error = 'Please select a valid group';
+    }
+    else if (this.selectuser === '' || this.selectuser === undefined || this.selectuser === null) {
+      this.success = false;
+          this.errors = true;
+          this.error = 'Please select a valid user';
+    }
+   
+    else {
+      this.service.AddUsertoGroup(this.selectuser, this.selectgroup).subscribe(res => {
+        if(res.valid==true){
+          this.errors = false;
+          this.success = true;
+          this.successmsg = this.selectuser + ' has been successfully been added to the group ' + this.selectgroup;
+        }
+        else {
+          this.success = false;
+          this.errors = true;
+          this.error = this.selectuser + ' has already been added to the group ' + this.selectgroup;
+        }
+      });
+    }
+  }
+
+  RemoveUserFromGroup() {
+    if(this.selectgroup === '' || this.selectgroup === undefined || this.selectgroup === null) {
+      this.success = false;
+          this.errors = true;
+          this.error = 'Please select a valid group';
+    }
+    else if (this.selectuser === '' || this.selectuser === undefined || this.selectuser === null) {
+      this.success = false;
+          this.errors = true;
+          this.error = 'Please select a valid user';
+    }
+   
+    else {
+      this.service.RemoveUserFromGroup(this.selectuser, this.selectgroup).subscribe(res => {
+        if(res.valid==true){
+          this.errors = false;
+          this.success = true;
+          this.successmsg = this.selectuser + ' has been successfully been removed from the group ' + this.selectgroup;
+        }
+        else {
+          this.success = false;
+          this.errors = true;
+          this.error = this.selectuser + ' is not part of the group ' + this.selectgroup;
         }
       });
     }

@@ -16,12 +16,19 @@
     <button (click)="onGotoGroupComponent($event)" id="removegroup">Remove Group</button>
     <button (click)="onGotoGroupComponent($event)" id="removechannel">Remove Channel</button>
     <div *ngIf="superadmin">
-      <button>Assign user a Role</button>
-      <button>Remove User</button>
+      <button (click)="onGotoUserComponent($event)" id="assignuserrole">Assign user a Role</button>
+      <button (click)="onGotoUserComponent($event)" id="removeuser">Remove User</button>
     </div>
     <button (click)="onGotoUserComponent($event)" id="removeuserfromchannel">Remove user from channel</button>
-    <button>Assign User a Role</button>
+    <button (click)="onGotoUserComponent($event)" id="assignusergroupassis">Assign User a Group Assis Role</button>
   </div>
+
+  <div *ngIf="groupassis">
+      <button (click)="onGotoUserComponent($event)" id="adduseringroup">Add User in a Group</button>
+      <button (click)="onGotoUserComponent($event)" id="removeuserfromgroup">Remove User from a Group</button>
+      <button (click)="onGotoGroupComponent($event)" id="createchannel">Create Channel in a Group</button>
+  </div>
+
 <div class="form-group">
     <label for="groups">
       Your Group: 
