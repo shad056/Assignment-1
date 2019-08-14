@@ -8,7 +8,7 @@ module.exports = function(app,fs){
         }
     
         group = req.body.group;
-      
+        channels = [];
         var userObj;
         var userObj2;
      
@@ -22,8 +22,13 @@ module.exports = function(app,fs){
           userObj = JSON.parse(data);
           for (let i=0;i<userObj.length;i++){
             if (userObj[i].Group == group){
+              
               //find first instance of user name and success
-             
+             for(let j=0;j<userObj[i].Channels.length;j++) {
+            
+              channels.push(userObj[i].Channels[j]);
+             }
+           
               var index = userObj.indexOf(userObj[i]);
              userObj.splice(index,1);
             
@@ -47,11 +52,27 @@ module.exports = function(app,fs){
                   //find first instance of user name and success
                var index = userObj2[i].Groups.indexOf(group);
                userObj2[i].Groups.splice(index,1);
-              
-            
                 }
-             
+              } 
             }
+
+            for (let i=0;i<userObj2.length;i++){
+              for(let j=0; j<userObj2[i].Channels.length; j++) {
+               if(userObj2[i].Channels[j] == channels[j]) {
+                    // for(let k=0; k<userObj2[i].Channels.length;k++) {
+                    //     if(userObj2[i].Channels[k] != undefined) {
+                    //   channels.push(userObj2[i].Channels[k]);
+                          
+                    // }
+
+                    //}
+                 var index = userObj2[i].Channels.indexOf(channels[j]);
+                 userObj2[i].Channels.splice(index,1);
+                
+            }
+           
+               }
+            
               }
               var newdata2 = JSON.stringify(userObj2);
               fs.writeFile('./dataStorage/users.json',newdata2,'utf-8',function(err){
