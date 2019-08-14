@@ -26,5 +26,15 @@ require('./routes/accountroute.js')(app,path);
 require('./routes/authenticationroute.js')(app,fs);
 require('./routes/groupsroute.js')(app,fs);
 require('./routes/channelsroute.js')(app,fs);
+require('./routes/creategrouproute.js')(app,fs);
+require('./routes/createuserroute.js')(app,fs);
+require('./routes/createchannelroute.js')(app,fs);
+require('./routes/getgroupsroute.js')(app,fs);
+require('./routes/getchannelsroute.js')(app,fs);
+require('./routes/getusersroute.js')(app,fs);
+require('./routes/addusertochannelroute.js')(app,fs);
+require('./routes/removegrouproute.js')(app,fs);
+require('./routes/removechannelroute.js')(app,fs);
+require('./routes/removeuserfromchannel.js')(app,fs);
 
 

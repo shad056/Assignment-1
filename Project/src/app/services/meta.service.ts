@@ -29,4 +29,34 @@ LoadGroups(uname) {
 FindChannel(group) {
   return this.http.post<any>('http://localhost:3000/api/channels', {chosengroup: group});
 }
+AddGroup(group) {
+  return this.http.post<any>('http://localhost:3000/api/creategroup',{newgroup: group});
+}
+AllGroups() {
+  return this.http.get<any>('http://localhost:3000/api/getgroups');
+}
+AddChannel(group, channel) {
+  return this.http.post<any>('http://localhost:3000/api/createchannel',{group: group, channel: channel});
+}
+AddUser(user,email) {
+  return this.http.post<any>('http://localhost:3000/api/createuser',{user: user, email:email});
+}
+AllChannels() {
+  return this.http.get<any>('http://localhost:3000/api/getchannels');
+}
+AllUsers() {
+  return this.http.get<any>('http://localhost:3000/api/getusers');
+}
+AddUsertoChannel(user,channel) {
+  return this.http.post<any>('http://localhost:3000/api/addusertochannel',{user: user, channel:channel});
+}
+RemoveGroup(group) {
+  return this.http.post<any>('http://localhost:3000/api/removegroup',{group: group});
+}
+RemoveChannel(channel) {
+  return this.http.post<any>('http://localhost:3000/api/removechannel',{channel: channel});
+}
+RemoveUserfromChannel(user,channel) {
+  return this.http.post<any>('http://localhost:3000/api/removeuserfromchannel',{user:user,channel: channel});
+}
 }

@@ -1,0 +1,41 @@
+<div *ngIf="errors" class="alert alert-danger" role="alert">
+        {{error}}
+      </div>
+      <div *ngIf="success" class="alert alert-success" role="alert">
+            {{successmsg}}
+          </div>
+          <div *ngIf="id=='createuser'">
+                <b>Enter a User Name: </b>
+                <input type="text" [(ngModel)]="uname" name="uname" required/>
+                <br>
+                <b>Enter an Email for the User: </b>
+                <input type="email" [(ngModel)]="email" name="email" required/>
+                <br>
+                <button class="btn btn-primary" (click)="CreateUser()">Submit</button>
+            </div>
+            <div *ngIf="id=='addusertochannel' || id=='removeuserfromchannel'">
+                <div class="form-group">
+                    <label for="channels">
+                      Channels
+                    </label>
+                  <select id="channel" name="channel" [(ngModel)]='selectchannel' class="form-control">
+                  <option *ngFor="let channel of channels" [value]="channel">{{ channel }} </option>
+                  </select>
+                  </div>
+                  <div class="form-group">
+                      <label for="channels">
+                        Users
+                      </label>
+                    <select id="user" name="user" [(ngModel)]='selectuser' class="form-control">
+                    <option *ngFor="let user of users" [value]="user">{{ user }} </option>
+                    </select>
+                    </div>
+
+                  <div *ngIf="id=='removeuserfromchannel'">
+                    <button class="btn btn-primary" (click)="RemoveUserfromChannel()">Remove User from channel</button>
+                  </div>
+
+                    <div *ngIf="id=='addusertochannel'">
+                  <button class="btn btn-primary" (click)="onUserAddtoChannel()">Add User to the Channel</button>
+                  </div>
+            </div>          

@@ -10,6 +10,9 @@ import {HttpClientModule} from '@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
 import { ChannelComponent } from './channel/channel.component';
 import { ChatComponent } from './chat/chat.component';
+import { GroupComponent } from './group/group.component';
+import { UserComponent } from './user/user.component';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +21,9 @@ import { ChatComponent } from './chat/chat.component';
     AccountComponent,
     ProfileComponent,
     ChannelComponent,
-    ChatComponent
+    ChatComponent,
+    GroupComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

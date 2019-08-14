@@ -24,7 +24,7 @@ module.exports = function(app,fs){
              group = userObj[i].Groups;
             channel = userObj[i].Channels;
             role = userObj[i].Roles;
-            res.send({group:group,channel:channel,valid:true});
+            res.send({group:group,channel:channel,role:role,valid:true});
             return;
           }
         }

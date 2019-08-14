@@ -12,11 +12,14 @@ export class AccountComponent implements OnInit {
    username;
    group = [];
    channels = [];
+   roles = [];
    selectgroup = "";
    selectchannel = "";
    error = false;
    errors = '';
-   role;
+   groupadmin = false;
+   superadmin = false;
+   groupassis = false;
   constructor(private router: Router, private service: MetaService, private http: HttpClient) { }
 
   ngOnInit() {
@@ -32,7 +35,22 @@ export class AccountComponent implements OnInit {
         this.group = null;
       }
       else {
+        
         this.group = res.group;
+        this.group.push('Custom Channel Group');
+        this.roles = res.role;
+        for (let role of this.roles) {
+          if(role == 'Group Admin') {
+            this.groupadmin = true;
+          }
+          if(role == 'Group Assis') {
+            this.groupassis = true;
+          }
+          if(role == 'Super Admin') {
+            this.superadmin = true;
+          }
+
+      }
       }
     },
     (err: HttpErrorResponse) => {
@@ -46,6 +64,18 @@ export class AccountComponent implements OnInit {
     this.router.navigateByUrl('/login');
   }
   onGroupClick(group: any) {
+    if(group == 'Custom Channel Group') {
+      this.http.post<any>('http://localhost:3000/api/groups', {username:this.username}).subscribe(res => {
+        if(res.valid == true) {
+          this.channels = res.channel;
+        }
+      },
+        (err: HttpErrorResponse) => {console.log(err.error); }
+  
+  
+      );
+    }
+    else {
     this.http.post<any>('http://localhost:3000/api/channels', {chosengroup: group}).subscribe(
       res => {
         if(res.valid == true) {
@@ -61,15 +91,7 @@ export class AccountComponent implements OnInit {
         console.log (err.message);
       }
     );
-    this.http.post<any>('http://localhost:3000/api/groups', {username:this.username}).subscribe(res => {
-      if(res.valid == true) {
-        this.channels.push(res.channel);
-      }
-    },
-      (err: HttpErrorResponse) => {console.log(err.error); }
-
-
-    );
+    }
   }
   onChannelClick() {
     if(this.selectchannel == '') {
@@ -88,5 +110,22 @@ export class AccountComponent implements OnInit {
     else {
     this.router.navigateByUrl('/chat/' + this.selectchannel);
     }
+  }
+ 
+  onGotoUserComponent(event) {
+    var target = event.target || event.srcElement || event.currentTarget;
+    var id = target.attributes.id.nodeValue;
+    this.router.navigateByUrl('/user/' + id);
+  }
+  onUserAddtoChannel(event) {
+    var target = event.target || event.srcElement || event.currentTarget;
+    var id = target.attributes.id.nodeValue;
+    this.router.navigateByUrl('/user/' + id);
+  }
+ 
+  onGotoGroupComponent(event) {
+    var target = event.target || event.srcElement || event.currentTarget;
+    var id = target.attributes.id.nodeValue;
+    this.router.navigateByUrl('/group/' + id);
   }
 }
