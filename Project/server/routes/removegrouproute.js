@@ -77,7 +77,7 @@ module.exports = function(app,fs){
               var newdata2 = JSON.stringify(userObj2);
               fs.writeFile('./dataStorage/users.json',newdata2,'utf-8',function(err){
                 if (err) throw err;
-                //Send response that registration was successfull.
+                //Send response that registration was successfull, valid is true
                 res.send({valid:true});
                });
              
