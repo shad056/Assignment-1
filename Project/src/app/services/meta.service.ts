@@ -73,5 +73,5 @@ AddUsertoGroup(user,group) {
 }
 RemoveUserFromGroup(user,group) {
   return this.http.post<any>('http://localhost:3000/api/removeuserfromgroup',{user:user, group: group});
-}
+} //
 }
