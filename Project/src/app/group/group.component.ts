@@ -29,12 +29,12 @@ export class GroupComponent implements OnInit, OnDestroy {
     );
     this.service.AllGroups().subscribe(res => {
       if(res.valid === true) {
-      this.groups = res.groups;
+      this.groups = res.group;
       }
     });
     this.service.AllChannels().subscribe(res => {
       if(res.valid === true) {
-        this.channels = res.channels;
+        this.channels = res.channel;
       }
     })
   }

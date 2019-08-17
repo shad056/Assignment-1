@@ -1,3 +1,8 @@
-export interface Post { 
-  title: string;  body: string;
-};
+export class dataModel {
+  valid:boolean;
+  group = [];
+  channel = [];
+  role = [];
+  user = [];
+  message: string;
+}

@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {MetaService} from '../services/meta.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import{HttpClient} from '@angular/common/http';
+import { dataModel } from '../services/Models/dataModel';
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
@@ -65,7 +66,7 @@ export class AccountComponent implements OnInit {
   }
   onGroupClick(group: any) {
     if(group == 'Custom Channel Group') {
-      this.http.post<any>('http://localhost:3000/api/groups', {username:this.username}).subscribe(res => {
+      this.http.post<dataModel>('http://localhost:3000/api/groups', {username:this.username}).subscribe(res => {
         if(res.valid == true) {
           this.channels = res.channel;
         }
@@ -76,7 +77,7 @@ export class AccountComponent implements OnInit {
       );
     }
     else {
-    this.http.post<any>('http://localhost:3000/api/channels', {chosengroup: group}).subscribe(
+    this.http.post<dataModel>('http://localhost:3000/api/channels', {chosengroup: group}).subscribe(
       res => {
         if(res.valid == true) {
           this.channels = res.channel;

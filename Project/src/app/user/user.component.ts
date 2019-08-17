@@ -33,18 +33,18 @@ export class UserComponent implements OnInit, OnDestroy {
     );
     this.service.AllChannels().subscribe(res => {
       if(res.valid === true) {
-        this.channels = res.channels;
+        this.channels = res.channel;
     
       }
     });
     this.service.AllUsers().subscribe(res => {
       if(res.valid === true) {
-        this.users = res.users;
+        this.users = res.user;
       }
     });
     this.service.AllGroups().subscribe(res => {
       if(res.valid === true) {
-      this.groups = res.groups;
+      this.groups = res.group;
       }
     });
   }

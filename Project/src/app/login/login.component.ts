@@ -1,5 +1,4 @@
 import { MetaService } from './../services/meta.service';
-import { Users } from './../services/Models/Users';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';

@@ -9,7 +9,7 @@ module.exports = function(app,fs){
           if (err) {
               console.log(err);
               //Some error happended opening the file. No Success
-              res.send({channels:channels,valid:false});
+              res.send({channel:channels,valid:false});
           } else {
           userObj = JSON.parse(data);
           for (let i=0;i<userObj.length;i++){
@@ -19,7 +19,7 @@ module.exports = function(app,fs){
                 }
             }
           }
-          res.send({channels:channels,valid:true});
+          res.send({channel:channels,valid:true});
       }
         
         

@@ -9,7 +9,7 @@ module.exports = function(app,fs){
           if (err) {
               console.log(err);
               //Some error happended opening the file. No Success
-              res.send({users:users,valid:false});
+              res.send({user:users,valid:false});
           } else {
           userObj = JSON.parse(data);
           for (let i=0;i<userObj.length;i++){
@@ -17,7 +17,7 @@ module.exports = function(app,fs){
               //find first instance of user name and success
                users.push(userObj[i].user);
           }
-          res.send({users:users,valid:true});
+          res.send({user:users,valid:true});
       }
         
         
