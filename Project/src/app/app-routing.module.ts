@@ -9,7 +9,8 @@ import { GroupComponent } from './group/group.component';
 import { UserComponent } from './user/user.component';
 
 
-const routes: Routes = [{ path: 'login', component: LoginComponent }, { path: 'account', component: AccountComponent}, {path: 'profile', component: ProfileComponent},
+const routes: Routes = [{ path: 'login', component: LoginComponent }, { path: 'account', component: AccountComponent}, 
+{path: 'profile', component: ProfileComponent},
 {path: 'channelhistory/:channel',component: ChannelComponent}, {path: 'chat/:channel',component: ChatComponent}
 ,{path: 'group/:id',component: GroupComponent}, {path: 'user/:id',component: UserComponent}];
 
