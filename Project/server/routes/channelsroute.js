@@ -1,6 +1,6 @@
 module.exports = function(app,fs){
   
-  
+   //This route loads all the channels available within a particular group
     app.post('/api/channels', function(req,res){
     
         if(!req.body) {

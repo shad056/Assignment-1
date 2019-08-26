@@ -13,8 +13,8 @@ export class ChatComponent implements OnInit,OnDestroy {
  private postSub: Subscription;
   ngOnInit() {
    this.postSub = this.route.paramMap.subscribe(
-      params => {this.channel = params.get('channel');}
-    );
+      params => {this.channel = params.get('channel');} 
+    ); //Subscription for receiving the parameters from the url
   }
   ngOnDestroy() {
     this.postSub.unsubscribe();

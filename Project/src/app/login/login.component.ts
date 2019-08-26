@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
   users;
   group;
   private postSub: Subscription;
-  onSubmit() {
+  onSubmit() {  //this function authenticates the user by calling the request from the server side and checking against the values in the JSON
+    //file to match any available users, once the user is found navigate them to the account component and store there details in the localStorage
  
   
     this.metaService.Authenticate(this.uname).subscribe(res => {this.users = res
@@ -58,7 +59,8 @@ export class LoginComponent implements OnInit {
 
   }
   ngOnInit() {
-    localStorage.removeItem("userdetails");
+    localStorage.removeItem("userdetails"); //remove user details from the local storage once this components loads, in
+    //order to prompt the user to log in again
   }
   
 }

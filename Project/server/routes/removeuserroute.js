@@ -1,6 +1,6 @@
 module.exports = function(app,fs){
   
-  
+  //this route removes a user
     app.post('/api/removeuser', function(req,res){
     
         if(!req.body) {

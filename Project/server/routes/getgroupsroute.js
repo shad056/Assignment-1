@@ -1,7 +1,7 @@
 
 module.exports = function(app,fs){
   
-  
+  //this routes gets all the available groups within the channels.json file
     app.get('/api/getgroups', function(req,res){
     
         var group = [];

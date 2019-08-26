@@ -1,7 +1,7 @@
 
 module.exports = function(app,fs){
   
-  
+  //this route gets all the available channels within the channels.json file
     app.get('/api/getchannels', function(req,res){
     
         var channels = [];

@@ -1,4 +1,6 @@
 module.exports = function(app,fs){
+
+  //This route adds a user to a channel and checks if the user has already been added to this channel or not
     app.post('/api/addusertochannel', (req, res) => {
         var isChannel = 0;
         var userObj;
@@ -22,41 +24,42 @@ module.exports = function(app,fs){
             }
               }
             }
+          }
 
-            for (let i=0;i<userObj.length;i++){
-                if (userObj[i].user == user){
-                  //Check for duplicates
-                  for(let j=0;j<userObj[i].Groups.length;j++) {
-                  if(userObj[i].Groups[j] != undefined)
-                  group.push(userObj[i].Groups[j]);
-                  }
-                }
-              }
+            // for (let i=0;i<userObj.length;i++){
+            //     if (userObj[i].user == user){
+            //       //Check for duplicates
+            //       for(let j=0;j<userObj[i].Groups.length;j++) {
+            //       if(userObj[i].Groups[j] != undefined)
+            //       group.push(userObj[i].Groups[j]);
+            //       }
+            //     }
+            //   }
               
-              fs.readFile('./dataStorage/channels.json','utf-8', function(err, data){
-                if (err){
-                    console.log(err);
-                } else {
-                userObj2 = JSON.parse(data);
-                for (let i=0;i<userObj2.length;i++){
-                for(let j=0; j<group.length; j++)
-                    if(userObj2[i].Group == group[j]) {
-                        for(let k=0; k<userObj2.length;k++) {
-                            if(userObj2[i].Channels[k] != undefined) {
-                            channels.push(userObj2[i].Channels[k]);
+            //   fs.readFile('./dataStorage/channels.json','utf-8', function(err, data){
+            //     if (err){
+            //         console.log(err);
+            //     } else {
+            //     userObj2 = JSON.parse(data);
+            //     for (let i=0;i<userObj2.length;i++){
+            //     for(let j=0; j<group.length; j++)
+            //         if(userObj2[i].Group == group[j]) {
+            //             for(let k=0; k<userObj2.length;k++) {
+            //                 if(userObj2[i].Channels[k] != undefined) {
+            //                 channels.push(userObj2[i].Channels[k]);
                               
-                        }
-                        }
-                    }
-                }
-                }
-                     for(let i=0; i<channels.length; i++) {
-                  if(channels[i] == channel) {
-                     isGroup = 1;
+            //             }
+            //             }
+            //         }
+            //     }
+            //     }
+            //          for(let i=0; i<channels.length; i++) {
+            //       if(channels[i] != channel) {
+            //          isGroup = 1;
                 
-                  }
-              }
-              if (isChannel > 0 || isGroup > 0){
+            //       }
+            //   }
+              if (isChannel > 0){
                 //Name already exists in the file
                  res.send({newchannel:'',valid:false});
                }
@@ -81,7 +84,6 @@ module.exports = function(app,fs){
          
 
             
-           }
-        })
-    });
+           });
+     
 }

@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {MetaService} from '../services/meta.service';
+import{HttpClient} from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-user',
@@ -10,48 +12,52 @@ import {MetaService} from '../services/meta.service';
 })
 export class UserComponent implements OnInit, OnDestroy {
 
-  constructor(private route: ActivatedRoute, private service: MetaService) { }
+  constructor(private route: ActivatedRoute, private service: MetaService, private http: HttpClient) { }
   private postSub: Subscription;
-  id;
-  uname;
-  email;
-  errors;
-  error;
-  success;
-  successmsg;
-  selectchannel = '';
-  channels = [];
-  selectuser = '';
-  selectrole = '';
-  users;
-  groups = [];
-  selectgroup = '';
+  id; //this is used to store the id of the received parameter from the url
+  uname; //this is used to store the username from the user input
+  email; //this is used to store the email from the user input
+  errors; //this is used to render the errors, whether to display them or not
+  error; //this is used to store the string for the error message to display
+  success; //this is used to render the success message, whether to display it or not
+  successmsg; //this is used to store the success message string
+  selectchannel = ''; //this is used to store the selected channel from the drop down on the client side - html file
+  channels = []; //this is used to store all the channels received from the server side
+  selectuser = ''; //this is used to store the selected user from the drop down on the client side - html file
+  selectrole = ''; //this is used to store the selected role from the drop down on the client side - html file
+  users; // this is used to store all the users received from the server side
+  groups = []; //this is used to store all the groups received from the server side
+  selectgroup = ''; //this is used to store the selected group from the drop down on the client side - html file
+  channelz = []; //this is used to store all the channels received from the server side
+  selectchannelz; //this is used to store the selected channel from the drop down on the client side - html file
   roles = ['Group Admin', 'Super Admin'];
+
   ngOnInit() {
-    this.postSub = this.route.paramMap.subscribe(
+    this.postSub = this.route.paramMap.subscribe( 
       params => {this.id = params.get('id');}
-    );
+    ); //Subscription for receiving the parameters from the url
     this.service.AllChannels().subscribe(res => {
       if(res.valid === true) {
         this.channels = res.channel;
     
       }
-    });
+    }); //Calling the service to load all the available channels
     this.service.AllUsers().subscribe(res => {
       if(res.valid === true) {
         this.users = res.user;
       }
-    });
+    }); //Calling the service to load all the available users
     this.service.AllGroups().subscribe(res => {
       if(res.valid === true) {
       this.groups = res.group;
       }
-    });
+    }); //Calling the service to load all the available groups
+  
   }
   ngOnDestroy() {
-    this.postSub.unsubscribe();
+    this.postSub.unsubscribe(); //unsubscribing to the service
   }
-  CreateUser() {
+  CreateUser() { //Create a new user
     if(this.uname === undefined || this.uname === '') {
       this.success = false;
       this.errors = true;
@@ -77,8 +83,8 @@ export class UserComponent implements OnInit, OnDestroy {
       });
     }
   }
-  onUserAddtoChannel() {
-    if(this.selectchannel === '' || this.selectchannel === undefined || this.selectchannel === null) {
+  onUserAddtoChannel() { //this function adds the user to a channel
+    if(this.selectchannelz === '' || this.selectchannelz === undefined || this.selectchannelz === null) {
       this.success = false;
           this.errors = true;
           this.error = 'Please select a valid channel';
@@ -89,7 +95,7 @@ export class UserComponent implements OnInit, OnDestroy {
           this.error = 'Please select a valid user';
     }
     else {
-      this.service.AddUsertoChannel(this.selectuser,this.selectchannel).subscribe(res => {
+      this.service.AddUsertoChannel(this.selectuser,this.selectchannelz).subscribe(res => {
         if(res.valid==true){
           this.errors = false;
           this.success = true;
@@ -103,7 +109,20 @@ export class UserComponent implements OnInit, OnDestroy {
       });
     }
   }
-  RemoveUserfromChannel() {
+
+  onUserClick(user: any) { //this renders the channels available within the associated group/s of the selected user, therefore
+    //when a user is selected from the drop down on the client side, this function is called to render the channels
+  
+      this.http.post<any>('http://localhost:3000/api/usergroupchannels', {username:user}).subscribe(res => {
+        if(res.valid == true) {
+          this.channelz = res.channel;
+        }
+      },
+        (err: HttpErrorResponse) => {console.log(err.error); }
+      );
+  }
+
+  RemoveUserfromChannel() { //this function removes a user from the channel
     if(this.selectchannel === '' || this.selectchannel === undefined || this.selectchannel === null) {
       this.success = false;
           this.errors = true;
@@ -130,7 +149,7 @@ export class UserComponent implements OnInit, OnDestroy {
     }
   }
 
-  RemoveUser() {
+  RemoveUser() { //this route removes a user
     if(this.selectuser === '' || this.selectuser === undefined || this.selectuser === null) {
       this.success = false;
           this.errors = true;
@@ -152,7 +171,7 @@ export class UserComponent implements OnInit, OnDestroy {
       });
     }
   }
-  AssignUserGroupAssis() {
+  AssignUserGroupAssis() { //this route assigns the user with a group assis role
     if(this.selectuser === '' || this.selectuser === undefined || this.selectuser === null) {
       this.success = false;
           this.errors = true;
@@ -175,7 +194,7 @@ export class UserComponent implements OnInit, OnDestroy {
     }
   }
 
-  AssignUserRole() {
+  AssignUserRole() { //assign the user with a role
     if(this.selectrole === '' || this.selectrole === undefined || this.selectrole === null) {
       this.success = false;
           this.errors = true;
@@ -203,7 +222,7 @@ export class UserComponent implements OnInit, OnDestroy {
     }
   }
 
-  AddUserGroup() {
+  AddUserGroup() { //add the user within a group
     if(this.selectgroup === '' || this.selectgroup === undefined || this.selectgroup === null) {
       this.success = false;
           this.errors = true;
@@ -231,7 +250,7 @@ export class UserComponent implements OnInit, OnDestroy {
     }
   }
 
-  RemoveUserFromGroup() {
+  RemoveUserFromGroup() { //remove the user from a group
     if(this.selectgroup === '' || this.selectgroup === undefined || this.selectgroup === null) {
       this.success = false;
           this.errors = true;

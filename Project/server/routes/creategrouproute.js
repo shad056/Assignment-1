@@ -1,5 +1,6 @@
 module.exports = function(app,fs){
-    //Route to manage user logins
+  //this route creates a group and checks whether the group already exists or not
+    
       app.post('/api/creategroup', (req, res) => {
     
           var isGroup = 0;

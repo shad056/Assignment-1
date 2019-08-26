@@ -1,5 +1,5 @@
 module.exports = function(app,fs){
-  
+   //This route authenticates a user and checks if the user is available in the JSON file (users.json) or not
   var users = require('./models/users');
 
 app.post('/api/auth', function(req,res){

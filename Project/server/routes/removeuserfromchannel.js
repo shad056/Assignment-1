@@ -1,6 +1,6 @@
 module.exports = function(app,fs){
   
-  
+  //this route removes a channel from a user
     app.post('/api/removeuserfromchannel', function(req,res){
     
         if(!req.body) {

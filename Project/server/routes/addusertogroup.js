@@ -1,4 +1,5 @@
 module.exports = function(app,fs){
+   //This route adds a user to a group and checks if the user has already been added to this group or not
     app.post('/api/addusertogroup', (req, res) => {
         var isChannel = 0;
         var userObj;

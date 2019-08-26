@@ -1,6 +1,6 @@
 module.exports = function(app,fs){
   
-  
+  //this route removes a group from a user
     app.post('/api/removeuserfromgroup', function(req,res){
     
         if(!req.body) {

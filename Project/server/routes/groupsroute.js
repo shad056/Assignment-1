@@ -1,6 +1,6 @@
 module.exports = function(app,fs){
   
-  
+  //this route gets all the details of the user
   app.post('/api/groups', function(req,res){
   
       if(!req.body) {

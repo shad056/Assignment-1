@@ -1,7 +1,7 @@
 
 module.exports = function(app,fs){
   
-  
+  //this routes gets all the users from the users.json file
     app.get('/api/getusers', function(req,res){
     
         var users = [];

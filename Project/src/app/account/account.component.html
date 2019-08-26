@@ -12,6 +12,10 @@
     <button (click)="onGotoGroupComponent($event)" id="creategroup">Create Group</button>
     <button (click)="onGotoGroupComponent($event)" id="createchannel">Create Channel</button>
     <button (click)="onGotoUserComponent($event)" id="createuser" >Create User</button>
+    <div *ngIf="groupadmin">
+      <button (click)="onGotoUserComponent($event)" id="adduseringroup">Add User in a Group</button>
+    </div>
+
     <button (click)="onGotoUserComponent($event)" id="addusertochannel">Add User to a Channel</button>
     <button (click)="onGotoGroupComponent($event)" id="removegroup">Remove Group</button>
     <button (click)="onGotoGroupComponent($event)" id="removechannel">Remove Channel</button>
@@ -31,15 +35,15 @@
 
 <div class="form-group">
     <label for="groups">
-      Your Group: 
+      Your Groups: 
     </label>
-  <select id="group" name="group" [(ngModel)]='selectgroup' class="form-control" (change)="onGroupClick($event.target.value)">
+  <select id="group" name="group" [(ngModel)]='selectgroup' class="form-control">
   <option *ngFor="let opt of group" [value]="opt">{{ opt }} </option>
   </select>
   </div>
   <div class="form-group">
     <label for="channels">
-      Channels
+      Your Channels
     </label>
   <select id="channel" name="channel" [(ngModel)]='selectchannel' class="form-control">
   <option *ngFor="let channel of channels" [value]="channel">{{ channel }} </option>

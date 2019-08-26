@@ -1,4 +1,5 @@
 module.exports = function(app,fs){
+   //This route creates a new channel and checks whether the channel already exists or not
         app.post('/api/createchannel', (req, res) => {
             var isChannel = 0;
             var userObj;

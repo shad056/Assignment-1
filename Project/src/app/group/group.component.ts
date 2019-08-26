@@ -11,28 +11,29 @@ import {MetaService} from '../services/meta.service';
 export class GroupComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private service: MetaService) { }
-  private postSub: Subscription;
-  id;
-  groupname;
-  channelname;
-  errors = false;
-  error;
-  success = false;
-  successmsg;
-  groups = [];
-  selectgroup = "";
-  selectchannel = '';
-  channels = [];
+  private postSub: Subscription; //Subscribing to the receiving parameters from the url and unsuscribing such service upon closing/destroying of this component
+  id; //this variable stores the received parameter from the account component
+  groupname; //this variable stores the group name from the user input 
+  channelname; //this variable stores the channel name from the user input 
+  errors = false; //this is used to trigger the errors whether to display them or not
+  error; //this stores the message for the error to display
+  success = false; //this is used to display the success messages
+  successmsg; //this stores the string for the success messages
+  groups = []; //this is used to store all the groups
+  selectgroup = ""; //this stores the selected group from the drop down on client side
+  selectchannel = ''; //this stores the selected channel from the drop down on the client side
+  channels = []; //this stores all the channels 
+
   ngOnInit() {
     this.postSub = this.route.paramMap.subscribe(
-      params => {this.id = params.get('id');}
-    );
-    this.service.AllGroups().subscribe(res => {
+      params => {this.id = params.get('id');} 
+    ); //Subscription for receiving the parameters from the url
+    this.service.AllGroups().subscribe(res => { //calling the service to receive all available groups in the JSON file
       if(res.valid === true) {
       this.groups = res.group;
       }
     });
-    this.service.AllChannels().subscribe(res => {
+    this.service.AllChannels().subscribe(res => { //calling the service to receive all available channels in the JSON file
       if(res.valid === true) {
         this.channels = res.channel;
       }
@@ -41,7 +42,7 @@ export class GroupComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.postSub.unsubscribe();
   }
-  CreateGroup() {
+  CreateGroup() { //this function is used to create a new group
     if(this.groupname === undefined || this.groupname === '') {
       this.success = false;
       this.errors = true;
@@ -62,7 +63,7 @@ export class GroupComponent implements OnInit, OnDestroy {
     });
   }
   }
-  CreateChannel() {
+  CreateChannel() { //this function creates a new channel
     if(this.selectgroup === "" || this.selectgroup === undefined) {
       this.success = false;
       this.errors = true;
@@ -89,7 +90,7 @@ export class GroupComponent implements OnInit, OnDestroy {
     });
     }
   }
-  RemoveGroup() {
+  RemoveGroup() { //this function removes a group
     if(this.selectgroup === "" || this.selectgroup === undefined) {
       this.success = false;
       this.errors = true;
@@ -111,7 +112,7 @@ export class GroupComponent implements OnInit, OnDestroy {
       });
       }
   }
-  RemoveChannel() {
+  RemoveChannel() { //this function removes a channel
     if(this.selectchannel === "" || this.selectchannel === undefined) {
       this.success = false;
       this.errors = true;

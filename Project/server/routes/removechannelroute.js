@@ -1,6 +1,6 @@
 module.exports = function(app,fs){
   
-  
+  //this route removes a channel from a group and users that have been assigned to it
     app.post('/api/removechannel', function(req,res){
     
         if(!req.body) {

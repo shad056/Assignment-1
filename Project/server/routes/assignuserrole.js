@@ -1,4 +1,5 @@
 module.exports = function(app,fs){
+   //This route adds a role to a user and checks if the user has already been added this role or not
     app.post('/api/assignuserrole', (req, res) => {
         var isChannel = 0;
         var userObj;

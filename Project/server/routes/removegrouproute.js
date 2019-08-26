@@ -1,5 +1,5 @@
 module.exports = function(app,fs){
-  
+  //this route removes a group and all the channels associated to it plus from the users who have been assigned this group and its channels
   
     app.post('/api/removegroup', function(req,res){
     

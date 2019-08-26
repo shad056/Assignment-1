@@ -9,68 +9,68 @@ import { Subject } from "rxjs"; //Event Handler
   providedIn: 'root'
 })
 export class MetaService {
-
+//This service sends API requests to the server to match with the route and perform the business logic to read/write to the JSON files
   posts;
   
   constructor(private http: HttpClient) {
    }
 
  
-Authenticate(uname) { 
+Authenticate(uname) { //this route is used for authenticating a user
   var user = {username: uname};
   return this.http.post<dataModel>('http://localhost:3000/api/auth', user);
       }
 
-LoadGroups(uname) {
+LoadGroups(uname) { //this route is used for loading all available groups
   var user = {username: uname};
   return this.http.post<dataModel>('http://localhost:3000/api/groups', user);
 }
-FindChannel(group) {
+FindChannel(group) { //this route is used for loading a particular channel within a group
   return this.http.post<dataModel>('http://localhost:3000/api/channels', {chosengroup: group});
 }
-AddGroup(group) {
+AddGroup(group) { //this route is used for adding a new group
   return this.http.post<dataModel>('http://localhost:3000/api/creategroup',{newgroup: group});
 }
-AllGroups() {
+AllGroups() { //this route is used for loading all the available groups
   return this.http.get<dataModel>('http://localhost:3000/api/getgroups');
 }
-AddChannel(group, channel) {
+AddChannel(group, channel) { //this route is used for adding a new channel
   return this.http.post<dataModel>('http://localhost:3000/api/createchannel',{group: group, channel: channel});
-}
-AddUser(user,email) {
+} 
+AddUser(user,email) { //this route is used for adding a new user
   return this.http.post<dataModel>('http://localhost:3000/api/createuser',{user: user, email:email});
 }
-AllChannels() {
+AllChannels() { //this route is used for loading all available channels
   return this.http.get<dataModel>('http://localhost:3000/api/getchannels');
 }
-AllUsers() {
+AllUsers() { //this route is used for loading all available users
   return this.http.get<dataModel>('http://localhost:3000/api/getusers');
 }
-AddUsertoChannel(user,channel) {
+AddUsertoChannel(user,channel) { //this route is used for adding a user to a channel
   return this.http.post<dataModel>('http://localhost:3000/api/addusertochannel',{user: user, channel:channel});
 }
-RemoveGroup(group) {
+RemoveGroup(group) { //this route is used for removing a particular group
   return this.http.post<dataModel>('http://localhost:3000/api/removegroup',{group: group});
 }
-RemoveChannel(channel) {
+RemoveChannel(channel) { //this route is used for removing a particular channel
   return this.http.post<dataModel>('http://localhost:3000/api/removechannel',{channel: channel});
 }
-RemoveUserfromChannel(user,channel) {
+RemoveUserfromChannel(user,channel) { //this route is used for removing a user from a channel
   return this.http.post<dataModel>('http://localhost:3000/api/removeuserfromchannel',{user:user,channel: channel});
 }
-RemoveUser(user) {
+RemoveUser(user) { //this route is used for removing a particular user
   return this.http.post<dataModel>('http://localhost:3000/api/removeuser',{user:user});
 }
-AssignUserGroupAssis(user) {
+AssignUserGroupAssis(user) { //this route is used for assigning the user a role of group assis
   return this.http.post<any>('http://localhost:3000/api/assignusergroupassis',{user:user});
 }
-AssignUserRole(user,role) {
+AssignUserRole(user,role) { //this route is used for assigning user a role
   return this.http.post<dataModel>('http://localhost:3000/api/assignuserrole',{user:user, role: role});
 }
-AddUsertoGroup(user,group) {
+AddUsertoGroup(user,group) { //this route is used for adding user to a group
   return this.http.post<dataModel>('http://localhost:3000/api/addusertogroup',{user:user, group: group});
 }
-RemoveUserFromGroup(user,group) {
+RemoveUserFromGroup(user,group) { //this route is used for removing user from a group
   return this.http.post<dataModel>('http://localhost:3000/api/removeuserfromgroup',{user:user, group: group});
 } 
 }
